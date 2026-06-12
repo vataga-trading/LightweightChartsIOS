@@ -1,20 +1,33 @@
 import Foundation
 
 /**
+ * Side of the price scale - left or right
+ */
+public enum PriceScaleSide: String, Codable, Sendable {
+    case left
+    case right
+}
+
+/**
  * Structure describing options of the chart. Series options are to be set separately
  */
 public struct ChartOptions: Codable, Sendable {
-    
+
     /**
      Width of the chart
      */
     public var width: Double?
-    
+
     /**
      Height of the chart
      */
     public var height: Double?
-    
+
+    /**
+     Setting this flag to `true` will make the chart watch the chart container's size and automatically resize the chart to fit its container whenever the size changes
+     */
+    public var autoSize: Bool?
+
     /**
      Structure with watermark options
 
@@ -47,7 +60,12 @@ public struct ChartOptions: Codable, Sendable {
      Structure with price scale option for right price scale
      */
     public var rightPriceScale: VisiblePriceScaleOptions?
-    
+
+    /**
+     The visible price scale to use as the default, when a series doesn't specify a price scale id
+     */
+    public var defaultVisiblePriceScaleId: PriceScaleSide?
+
     /**
      Structure describing default price scale options for overlays
      */
@@ -94,13 +112,20 @@ public struct ChartOptions: Codable, Sendable {
     public var trackingMode: TrackingModeOptions?
 
     public var addDefaultPane: Bool?
-        
+
+    /**
+     When `true`, the currently hovered series is rendered on top of all other series
+     */
+    public var hoveredSeriesOnTop: Bool?
+
     public init(width: Double? = nil,
                 height: Double? = nil,
+                autoSize: Bool? = nil,
                 watermark: DeprecatedWatermarkOptions? = nil,
                 layout: LayoutOptions? = nil,
                 leftPriceScale: VisiblePriceScaleOptions? = nil,
                 rightPriceScale: VisiblePriceScaleOptions? = nil,
+                defaultVisiblePriceScaleId: PriceScaleSide? = nil,
                 overlayPriceScales: OverlayPriceScaleOptions? = nil,
                 timeScale: TimeScaleOptions? = nil,
                 crosshair: CrosshairOptions? = nil,
@@ -110,14 +135,17 @@ public struct ChartOptions: Codable, Sendable {
                 handleScale: TogglableOptions<HandleScaleOptions>? = nil,
                 kineticScroll: KineticScrollOptions? = nil,
                 trackingMode: TrackingModeOptions? = nil,
-                addDefaultPane: Bool? = nil) {
+                addDefaultPane: Bool? = nil,
+                hoveredSeriesOnTop: Bool? = nil) {
         self.width = width
         self.height = height
+        self.autoSize = autoSize
         self._watermark = watermark
         self._watermarkWasExplicitlySet = watermark != nil
         self.layout = layout
         self.leftPriceScale = leftPriceScale
         self.rightPriceScale = rightPriceScale
+        self.defaultVisiblePriceScaleId = defaultVisiblePriceScaleId
         self.overlayPriceScales = overlayPriceScales
         self.timeScale = timeScale
         self.crosshair = crosshair
@@ -128,10 +156,11 @@ public struct ChartOptions: Codable, Sendable {
         self.kineticScroll = kineticScroll
         self.trackingMode = trackingMode
         self.addDefaultPane = addDefaultPane
+        self.hoveredSeriesOnTop = hoveredSeriesOnTop
     }
-    
+
     enum CodingKeys: String, CodingKey {
-        case width, height, layout, leftPriceScale, rightPriceScale, overlayPriceScales, timeScale, crosshair, grid, localization, handleScroll, handleScale, kineticScroll, trackingMode, addDefaultPane
+        case width, height, autoSize, layout, leftPriceScale, rightPriceScale, defaultVisiblePriceScaleId, overlayPriceScales, timeScale, crosshair, grid, localization, handleScroll, handleScale, kineticScroll, trackingMode, addDefaultPane, hoveredSeriesOnTop
         case _watermark = "watermark"
     }
     
@@ -144,9 +173,11 @@ extension ChartOptions {
     private struct JSChartOptions: Encodable {
         var width: Double?
         var height: Double?
+        var autoSize: Bool?
         var layout: LayoutOptions?
         var leftPriceScale: VisiblePriceScaleOptions?
         var rightPriceScale: VisiblePriceScaleOptions?
+        var defaultVisiblePriceScaleId: PriceScaleSide?
         var overlayPriceScales: OverlayPriceScaleOptions?
         var timeScale: TimeScaleOptions?
         var crosshair: CrosshairOptions?
@@ -157,13 +188,16 @@ extension ChartOptions {
         var kineticScroll: KineticScrollOptions?
         var trackingMode: TrackingModeOptions?
         var addDefaultPane: Bool?
+        var hoveredSeriesOnTop: Bool?
 
         init(_ options: ChartOptions) {
             self.width = options.width
             self.height = options.height
+            self.autoSize = options.autoSize
             self.layout = options.layout
             self.leftPriceScale = options.leftPriceScale
             self.rightPriceScale = options.rightPriceScale
+            self.defaultVisiblePriceScaleId = options.defaultVisiblePriceScaleId
             self.overlayPriceScales = options.overlayPriceScales
             self.timeScale = options.timeScale
             self.crosshair = options.crosshair
@@ -174,6 +208,7 @@ extension ChartOptions {
             self.kineticScroll = options.kineticScroll
             self.trackingMode = options.trackingMode
             self.addDefaultPane = options.addDefaultPane
+            self.hoveredSeriesOnTop = options.hoveredSeriesOnTop
         }
     }
 

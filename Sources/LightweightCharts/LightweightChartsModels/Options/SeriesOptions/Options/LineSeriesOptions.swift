@@ -6,6 +6,7 @@ public struct LineSeriesOptions: SeriesOptionsCommon, Sendable {
     public var title: String?
     public var priceScaleId: String?
     public var visible: Bool?
+    public var hitTestTolerance: Double?
     public var priceLineVisible: Bool?
     public var priceLineSource: PriceLineSource?
     public var priceLineWidth: LineWidth?
@@ -17,15 +18,18 @@ public struct LineSeriesOptions: SeriesOptionsCommon, Sendable {
     public var baseLineWidth: LineWidth?
     public var baseLineStyle: LineStyle?
     public var autoscaleInfoProvider: AutoscaleInfoProvider?
-    
+    public var conflationThresholdFactor: Double?
+
     public var color: ChartColor?
     public var lineStyle: LineStyle?
     public var lineWidth: LineWidth?
     public var lineType: LineType?
+    public var lineVisible: Bool?
     public var crosshairMarkerVisible: Bool?
     public var crosshairMarkerRadius: Double?
     public var crosshairMarkerBorderColor: ChartColor?
     public var crosshairMarkerBackgroundColor: ChartColor?
+    public var crosshairMarkerBorderWidth: Double?
     public var pointMarkersVisible: Bool?
     public var pointMarkersRadius: Double?
     public var lastPriceAnimation: LastPriceAnimationMode?
@@ -34,6 +38,7 @@ public struct LineSeriesOptions: SeriesOptionsCommon, Sendable {
                 title: String? = nil,
                 priceScaleId: String? = nil,
                 visible: Bool? = nil,
+                hitTestTolerance: Double? = nil,
                 priceLineVisible: Bool? = nil,
                 priceLineSource: PriceLineSource? = nil,
                 priceLineWidth: LineWidth? = nil,
@@ -45,14 +50,17 @@ public struct LineSeriesOptions: SeriesOptionsCommon, Sendable {
                 baseLineWidth: LineWidth? = nil,
                 baseLineStyle: LineStyle? = nil,
                 autoscaleInfoProvider: AutoscaleInfoProvider? = nil,
+                conflationThresholdFactor: Double? = nil,
                 color: ChartColor? = nil,
                 lineStyle: LineStyle? = nil,
                 lineWidth: LineWidth? = nil,
                 lineType: LineType? = nil,
+                lineVisible: Bool? = nil,
                 crosshairMarkerVisible: Bool? = nil,
                 crosshairMarkerRadius: Double? = nil,
                 crosshairMarkerBorderColor: ChartColor? = nil,
                 crosshairMarkerBackgroundColor: ChartColor? = nil,
+                crosshairMarkerBorderWidth: Double? = nil,
                 pointMarkersVisible: Bool? = nil,
                 pointMarkersRadius: Double? = nil,
                 lastPriceAnimation: LastPriceAnimationMode? = nil) {
@@ -60,6 +68,7 @@ public struct LineSeriesOptions: SeriesOptionsCommon, Sendable {
         self.title = title
         self.priceScaleId = priceScaleId
         self.visible = visible
+        self.hitTestTolerance = hitTestTolerance
         self.priceLineVisible = priceLineVisible
         self.priceLineSource = priceLineSource
         self.priceLineWidth = priceLineWidth
@@ -71,14 +80,17 @@ public struct LineSeriesOptions: SeriesOptionsCommon, Sendable {
         self.baseLineWidth = baseLineWidth
         self.baseLineStyle = baseLineStyle
         self.autoscaleInfoProvider = autoscaleInfoProvider
+        self.conflationThresholdFactor = conflationThresholdFactor
         self.color = color
         self.lineStyle = lineStyle
         self.lineWidth = lineWidth
         self.lineType = lineType
+        self.lineVisible = lineVisible
         self.crosshairMarkerVisible = crosshairMarkerVisible
         self.crosshairMarkerRadius = crosshairMarkerRadius
         self.crosshairMarkerBorderColor = crosshairMarkerBorderColor
         self.crosshairMarkerBackgroundColor = crosshairMarkerBackgroundColor
+        self.crosshairMarkerBorderWidth = crosshairMarkerBorderWidth
         self.pointMarkersVisible = pointMarkersVisible
         self.pointMarkersRadius = pointMarkersRadius
         self.lastPriceAnimation = lastPriceAnimation

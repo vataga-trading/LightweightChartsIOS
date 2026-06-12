@@ -65,6 +65,11 @@ protocol OverlayPriceScaleOptionsProtocol {
     var borderColor: ChartColor? { get }
 
     /**
+     Price scale text color. If not provided, the layout text color is used
+     */
+    var textColor: ChartColor? { get }
+
+    /**
      Indicates whether the price scale displays only full lines of text or partial lines.
      */
     var entireTextOnly: Bool? { get }
@@ -83,6 +88,11 @@ protocol OverlayPriceScaleOptionsProtocol {
      Ensures edge tick marks are visible when possible.
      */
     var ensureEdgeTickMarksVisible: Bool? { get }
+
+    /**
+     Controls the density of tick marks on the price scale
+     */
+    var tickMarkDensity: Double? { get }
 
 }
 
@@ -114,12 +124,14 @@ public struct PriceScaleOptions: Codable, VisiblePriceScaleOptionsProtocol, Send
     public var scaleMargins: PriceScaleMargins?
     public var borderVisible: Bool?
     public var borderColor: ChartColor?
+    public var textColor: ChartColor?
     public var entireTextOnly: Bool?
     public var visible: Bool?
     public var ticksVisible: Bool?
     public var minimumWidth: Double?
     public var ensureEdgeTickMarksVisible: Bool?
-    
+    public var tickMarkDensity: Double?
+
     public init(autoScale: Bool? = nil,
                 mode: PriceScaleMode? = nil,
                 invertScale: Bool? = nil,
@@ -127,11 +139,13 @@ public struct PriceScaleOptions: Codable, VisiblePriceScaleOptionsProtocol, Send
                 scaleMargins: PriceScaleMargins? = nil,
                 borderVisible: Bool? = nil,
                 borderColor: ChartColor? = nil,
+                textColor: ChartColor? = nil,
                 entireTextOnly: Bool? = nil,
                 visible: Bool? = nil,
                 ticksVisible: Bool? = nil,
                 minimumWidth: Double? = nil,
-                ensureEdgeTickMarksVisible: Bool? = nil) {
+                ensureEdgeTickMarksVisible: Bool? = nil,
+                tickMarkDensity: Double? = nil) {
         self.autoScale = autoScale
         self.mode = mode
         self.invertScale = invertScale
@@ -139,11 +153,13 @@ public struct PriceScaleOptions: Codable, VisiblePriceScaleOptionsProtocol, Send
         self.scaleMargins = scaleMargins
         self.borderVisible = borderVisible
         self.borderColor = borderColor
+        self.textColor = textColor
         self.entireTextOnly = entireTextOnly
         self.visible = visible
         self.ticksVisible = ticksVisible
         self.minimumWidth = minimumWidth
         self.ensureEdgeTickMarksVisible = ensureEdgeTickMarksVisible
+        self.tickMarkDensity = tickMarkDensity
     }
     
 }
@@ -163,31 +179,37 @@ public struct OverlayPriceScaleOptions: Codable, OverlayPriceScaleOptionsProtoco
     public var scaleMargins: PriceScaleMargins?
     public var borderVisible: Bool?
     public var borderColor: ChartColor?
+    public var textColor: ChartColor?
     public var entireTextOnly: Bool?
     public var ticksVisible: Bool?
     public var minimumWidth: Double?
     public var ensureEdgeTickMarksVisible: Bool?
-    
+    public var tickMarkDensity: Double?
+
     public init(mode: PriceScaleMode? = nil,
                 invertScale: Bool? = nil,
                 alignLabels: Bool? = nil,
                 scaleMargins: PriceScaleMargins? = nil,
                 borderVisible: Bool? = nil,
                 borderColor: ChartColor? = nil,
+                textColor: ChartColor? = nil,
                 entireTextOnly: Bool? = nil,
                 ticksVisible: Bool? = nil,
                 minimumWidth: Double? = nil,
-                ensureEdgeTickMarksVisible: Bool? = nil) {
+                ensureEdgeTickMarksVisible: Bool? = nil,
+                tickMarkDensity: Double? = nil) {
         self.mode = mode
         self.invertScale = invertScale
         self.alignLabels = alignLabels
         self.scaleMargins = scaleMargins
         self.borderVisible = borderVisible
         self.borderColor = borderColor
+        self.textColor = textColor
         self.entireTextOnly = entireTextOnly
         self.ticksVisible = ticksVisible
         self.minimumWidth = minimumWidth
         self.ensureEdgeTickMarksVisible = ensureEdgeTickMarksVisible
+        self.tickMarkDensity = tickMarkDensity
     }
     
 }

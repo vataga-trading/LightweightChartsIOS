@@ -787,6 +787,50 @@ final class Pane: PaneApi {
         return paneIndex
     }
 
+    private struct PaneSeriesDescriptor: Decodable {
+        let name: String
+        let type: SeriesType
+    }
+
+    func getSeries() async throws(JavaScriptBridgeError) -> [any SeriesApi] {
+        let script = """
+        (function() {
+            var paneSeries = \(paneExpression()).getSeries();
+            var result = [];
+            paneSeries.forEach(function(s) {
+                seriesArray.forEach(function(stored) {
+                    if (stored.series === s) {
+                        result.push({ name: stored.name, type: s.seriesType() });
+                    }
+                });
+            });
+            return result;
+        })()
+        """
+        let descriptors: [PaneSeriesDescriptor] = try await requireContext().decodedResult(forScript: script)
+        return descriptors.map { attachedSeries(name: $0.name, type: $0.type) }
+    }
+
+    private func attachedSeries(name: String, type: SeriesType) -> any SeriesApi {
+        let series: any SeriesApi & SeriesObject
+        switch type {
+        case .line:
+            series = LineSeries(context: context, closureStore: closureStore, jsName: name)
+        case .area:
+            series = AreaSeries(context: context, closureStore: closureStore, jsName: name)
+        case .baseline:
+            series = BaselineSeries(context: context, closureStore: closureStore, jsName: name)
+        case .candlestick:
+            series = CandlestickSeries(context: context, closureStore: closureStore, jsName: name)
+        case .bar:
+            series = BarSeries(context: context, closureStore: closureStore, jsName: name)
+        case .histogram:
+            series = HistogramSeries(context: context, closureStore: closureStore, jsName: name)
+        }
+        series.chartJSName = chartJSName
+        return series
+    }
+
     func setHeight(height: Double) async throws(JavaScriptBridgeError) {
         let script = "\(paneExpression()).setHeight(\(height));"
         _ = try await requireContext().evaluateScript(script)

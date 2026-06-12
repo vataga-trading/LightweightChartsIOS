@@ -1,12 +1,12 @@
 #!/bin/bash
 # Reproducible build script for upstream lightweight-charts UMD artifact
 # Usage: ./scripts/build-upstream-umd.sh [version]
-# Example: ./scripts/build-upstream-umd.sh v5.1.0
+# Example: ./scripts/build-upstream-umd.sh v5.2.0
 
 set -e
 
-# Version to build (defaults to v5.1.0)
-VERSION=${1:-v5.1.0}
+# Version to build (defaults to v5.2.0)
+VERSION=${1:-v5.2.0}
 UPSTREAM_REPO=${LIGHTWEIGHT_CHARTS_REPO:-https://github.com/tradingview/lightweight-charts}
 OUTPUT_FILE="Sources/LightweightCharts/Assets/lightweight-charts.js"
 

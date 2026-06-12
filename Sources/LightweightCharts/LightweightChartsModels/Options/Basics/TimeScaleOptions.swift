@@ -27,6 +27,9 @@ public struct TimeScaleOptions: Sendable {
     public var tickMarkMaxCharacterLength: Int?
     public var minimumHeight: Double?
     public var ticksVisible: Bool?
+    public var uniformDistribution: Bool?
+    public var allowBoldLabels: Bool?
+    public var ignoreWhitespaceIndices: Bool?
     public var enableConflation: Bool?
     public var conflationThresholdFactor: Double?
     public var precomputeConflationOnInit: Bool?
@@ -61,6 +64,9 @@ public struct TimeScaleOptions: Sendable {
                 tickMarkMaxCharacterLength: Int? = nil,
                 minimumHeight: Double? = nil,
                 ticksVisible: Bool? = nil,
+                uniformDistribution: Bool? = nil,
+                allowBoldLabels: Bool? = nil,
+                ignoreWhitespaceIndices: Bool? = nil,
                 enableConflation: Bool? = nil,
                 conflationThresholdFactor: Double? = nil,
                 precomputeConflationOnInit: Bool? = nil,
@@ -85,6 +91,9 @@ public struct TimeScaleOptions: Sendable {
         self.tickMarkMaxCharacterLength = tickMarkMaxCharacterLength
         self.minimumHeight = minimumHeight
         self.ticksVisible = ticksVisible
+        self.uniformDistribution = uniformDistribution
+        self.allowBoldLabels = allowBoldLabels
+        self.ignoreWhitespaceIndices = ignoreWhitespaceIndices
         self.enableConflation = enableConflation
         self.conflationThresholdFactor = conflationThresholdFactor
         self.precomputeConflationOnInit = precomputeConflationOnInit
@@ -116,6 +125,10 @@ extension TimeScaleOptions: Codable {
         case allowShiftVisibleRangeOnWhitespaceReplacement
         case tickMarkMaxCharacterLength
         case minimumHeight
+        case ticksVisible
+        case uniformDistribution
+        case allowBoldLabels
+        case ignoreWhitespaceIndices
         case enableConflation
         case conflationThresholdFactor
         case precomputeConflationOnInit

@@ -6,6 +6,7 @@ public struct HistogramSeriesOptions: SeriesOptionsCommon, Sendable {
     public var title: String?
     public var priceScaleId: String?
     public var visible: Bool?
+    public var hitTestTolerance: Double?
     public var priceLineVisible: Bool?
     public var priceLineSource: PriceLineSource?
     public var priceLineWidth: LineWidth?
@@ -17,7 +18,8 @@ public struct HistogramSeriesOptions: SeriesOptionsCommon, Sendable {
     public var baseLineWidth: LineWidth?
     public var baseLineStyle: LineStyle?
     public var autoscaleInfoProvider: AutoscaleInfoProvider?
-    
+    public var conflationThresholdFactor: Double?
+
     public var color: ChartColor?
     public var base: Double?
     
@@ -25,6 +27,7 @@ public struct HistogramSeriesOptions: SeriesOptionsCommon, Sendable {
                 title: String? = nil,
                 priceScaleId: String? = nil,
                 visible: Bool? = nil,
+                hitTestTolerance: Double? = nil,
                 priceLineVisible: Bool? = nil,
                 priceLineSource: PriceLineSource? = nil,
                 priceLineWidth: LineWidth? = nil,
@@ -36,12 +39,14 @@ public struct HistogramSeriesOptions: SeriesOptionsCommon, Sendable {
                 baseLineWidth: LineWidth? = nil,
                 baseLineStyle: LineStyle? = nil,
                 autoscaleInfoProvider: AutoscaleInfoProvider? = nil,
+                conflationThresholdFactor: Double? = nil,
                 color: ChartColor? = nil,
                 base: Double? = nil) {
         self.lastValueVisible = lastValueVisible
         self.title = title
         self.priceScaleId = priceScaleId
         self.visible = visible
+        self.hitTestTolerance = hitTestTolerance
         self.priceLineVisible = priceLineVisible
         self.priceLineSource = priceLineSource
         self.priceLineWidth = priceLineWidth
@@ -53,6 +58,7 @@ public struct HistogramSeriesOptions: SeriesOptionsCommon, Sendable {
         self.baseLineWidth = baseLineWidth
         self.baseLineStyle = baseLineStyle
         self.autoscaleInfoProvider = autoscaleInfoProvider
+        self.conflationThresholdFactor = conflationThresholdFactor
         self.color = color
         self.base = base
     }

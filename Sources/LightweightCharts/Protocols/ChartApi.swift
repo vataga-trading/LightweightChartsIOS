@@ -86,6 +86,12 @@ public protocol PaneApi: AnyObject {
      */
     func paneIndex() async throws(JavaScriptBridgeError) -> Int
 
+    /**
+     * Returns the series attached to this pane.
+     * - Returns: an array of series APIs for all series created through this chart that belong to this pane
+     */
+    func getSeries() async throws(JavaScriptBridgeError) -> [any SeriesApi]
+
 }
 
  /**

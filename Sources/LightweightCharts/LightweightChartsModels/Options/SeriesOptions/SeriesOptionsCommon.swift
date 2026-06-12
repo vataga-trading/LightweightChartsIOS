@@ -24,7 +24,12 @@ public protocol SeriesOptionsCommon: Codable, Sendable {
      Visibility of series.
      */
     var visible: Bool? { get }
-    
+
+    /**
+     Additional tolerance in pixels used when hit testing the series
+     */
+    var hitTestTolerance: Double? { get }
+
     /**
      Visibility of the price line. Price line is a horizontal line indicating the last price of the series
      */
@@ -79,7 +84,12 @@ public protocol SeriesOptionsCommon: Codable, Sendable {
      Function that overrides calculating of visible prices range
      */
     var autoscaleInfoProvider: AutoscaleInfoProvider? { get }
-    
+
+    /**
+     Per-series conflation threshold factor. Overrides the global time scale conflation threshold for this series
+     */
+    var conflationThresholdFactor: Double? { get }
+
 }
 
 // MARK: -
